@@ -11,7 +11,7 @@ If you are cloning this repo then the steps are:
 
 * Start the director:
   - On director device, go inside director folder in the terminal.
-  - set up the listen_host to your FQDN or IP and available port number.
+  - set up the listen_host to your FQDN or IP and available port number in director.yaml file.
   - If mTLS protection is not set up, run this command:(easy way)
   ```
       fx director start --disable-tls -c director_config.yaml
@@ -27,7 +27,7 @@ If you are cloning this repo then the steps are:
 
 * Start the envoy:
   - On envoy device, go inside envoy folder in terminal. 
-  - Set up the sample and target shape(if your data is different)
+  - Set up the sample and target shape(if your data is different) and also shard descriptor(.py) file address in envoy_congig.yaml file
   - If mTLS protection is not set up, run this command:
     ```
       fx envoy start \
