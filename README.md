@@ -10,6 +10,7 @@
 If you are cloning this repo then the steps are:
 
 * Start the director:
+  - On director device, go inside director folder in the terminal.
   - set up the listen_host to your FQDN or IP and available port number.
   - If mTLS protection is not set up, run this command:(easy way)
   ```
@@ -24,7 +25,8 @@ If you are cloning this repo then the steps are:
    ```
   - You can see the log info of director name,port etc. when it starts
 
-* Start the collaborators:
+* Start the envoy:
+  - On envoy device, go inside envoy folder in terminal. 
   - Set up the sample and target shape(if your data is different)
   - If mTLS protection is not set up, run this command:
     ```
