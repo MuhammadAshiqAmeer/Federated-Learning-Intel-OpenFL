@@ -1,4 +1,4 @@
-# Federated_lemon-melon_CNN_classifier(Intel-open-fl)
+# Federated lemon-melon CNN classifier(Intel-open-fl)
 ### Director based federated learning workflow of a custom Lemon-melon CNN classifier done in Intel-Open-FL.
 
 * Contains two directories, director and envoy.
