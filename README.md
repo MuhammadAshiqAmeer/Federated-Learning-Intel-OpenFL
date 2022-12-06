@@ -5,7 +5,7 @@
 #### Overview of the repo:
 
 * Contains two directories, director and envoy.
-* Director folder has a .ipynb (notebook) file where the experiment is setup by a Data scientist, which contains code for connecting to federation devices such as aggregators and collaborators, setting up federation tasks for diffrent connected devices, setting federation algorithm etc.
+* Director folder has a .ipynb (notebook) file where the experiment is setup by a Data scientist, which contains code for connecting to federation devices such as aggregators and collaborators, setting up federation tasks for different connected devices, setting federation algorithm etc.
 * It also contains director config(.yaml) file which sets the configuration of listen host and port of director, also sample and taget shape of data united accross the federation.
 * Envoy folder contains the envoy config (.yaml) file that sets local shard descriptor, rank of the collaborator and worldsize etc., also a shard descreptor(.py) file that is responsible for splitting a single dataset according to collaborator's rank so that every collaborator will get different data during the simulation.(Not the case in real world scenario, there will be independent data associated with each collaborators,so no need of shard_desc)
 
@@ -99,7 +99,7 @@ Changing the default weighted average aggregation algorithm:
        ```
    - You can code your own aggregation function and import it into the notebook and set aggregation function using TaskInterface decorators.
    - You can also code it in the same notebook in seperate cell and import it and set aggregation function using the task interface decorators.
-   - [Overriding aggregation functions](https://openfl.readthedocs.io/en/latest/index.html)
+   - [Overriding aggregation functions](https://openfl.readthedocs.io/en/latest/overriding_agg_fn.html)
 
 ### Reference:
   - [Official intel open federated learning documentation](https://openfl.readthedocs.io/en/latest/index.html)
