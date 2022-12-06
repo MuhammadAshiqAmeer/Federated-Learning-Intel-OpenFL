@@ -1,5 +1,8 @@
 # Federated lemon-melon CNN classifier(Intel-open-fl)
 ### Director based federated learning workflow of a custom Lemon-melon CNN classifier done in Intel-Open-FL.
+#### Aim to approach and customize Intel-openfl by building an FL model from a custom dataset and an ML experiment defined, using some non default aggregation function.
+
+#### Overview of the repo:
 
 * Contains two directories, director and envoy.
 * Director folder has a .ipynb (notebook) file where the experiment is setup by a Data scientist, which contains code for connecting to federation devices such as aggregators and collaborators, setting up federation tasks for diffrent connected devices, setting federation algorithm etc.
@@ -82,6 +85,21 @@ Steps to implement a FL experiment from scratch:
   
     - Create a jupyter notebook file.
     - Describe an experiment([see documentation](https://openfl.readthedocs.io/en/latest/running_the_federation.html#experiment-manager-describe-an-experiment))
+    
+Changing the default weigted average aggregation algorithm:
+
+   - Inside the openfl directory openfl / component / aggregation_functions or inside openfl / interface / aggegation_function some builtin aggregation functions are given.
+    example
+       ```
+       from openfl.interface.aggregation_functions import Median
+       TI = TaskInterface()
+       agg_fn = Median()
+       @TI.register_fl_task(model='model', data_loader='train_loader', device='device', optimizer='optimizer')
+       @TI.set_aggregation_function(agg_fn)
+       ```
+   - You can code your own aggregation function and import it into the notebook and set aggregation function using TaskInterface decorators.
+   - You can also code it in the same notebook in seperate cell and import it and set aggregation function using the task interface decorators.
+   - [Overriding aggregation functions](https://openfl.readthedocs.io/en/latest/index.html)
 
 ### Reference:
   - [Official intel open federated learning documentation](https://openfl.readthedocs.io/en/latest/index.html)
