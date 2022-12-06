@@ -86,7 +86,7 @@ Steps to implement a FL experiment from scratch:
     - Create a jupyter notebook file.
     - Describe an experiment([see documentation](https://openfl.readthedocs.io/en/latest/running_the_federation.html#experiment-manager-describe-an-experiment))
     
-Changing the default weigted average aggregation algorithm:
+Changing the default weighted average aggregation algorithm:
 
    - Inside the openfl directory openfl / component / aggregation_functions or inside openfl / interface / aggegation_function some builtin aggregation functions are given.
     example
