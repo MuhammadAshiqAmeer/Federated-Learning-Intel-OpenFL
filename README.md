@@ -58,7 +58,7 @@ If you are cloning this repo then the steps are:
     - The Open Federated Learning (OpenFL) interactive Python API enables the Experiment manager (data scientists) to define and start a federated learning experiment from a single entry point: a Jupyter* notebook or a Python script.
     - The jupyter notebook in the director folder contains the detailed code to run the federated learning experiment.
 
-Steps to implement a FL experiment from scratch:
+Steps to implement an FL experiment from scratch:
 
   - On director :
   
