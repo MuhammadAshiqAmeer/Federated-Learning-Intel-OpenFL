@@ -19,7 +19,7 @@ If you are cloning this repo then the steps are:
   ```
       fx director start --disable-tls -c director_config.yaml
   ```
-- If you have a federation with PKI certificates, run this command:
+  - If you have a federation with PKI certificates, run this command:
   ```
       fx director start -c director_config.yaml \
      -rc cert/root_ca.crt \
