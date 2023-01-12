@@ -21,9 +21,9 @@ If you are cloning this repo then the steps are:
   ```
   - If you have a federation with PKI certificates, run this command:
   ```
-      fx director start -c director_config.yaml \
-     -rc cert/root_ca.crt \
-     -pk cert/priv.key \
+      fx director start -c director_config.yaml 
+     -rc cert/root_ca.crt 
+     -pk cert/priv.key 
      -oc cert/open.crt
    ```
   - You can see the log info of director name,port etc. when it starts
@@ -33,22 +33,22 @@ If you are cloning this repo then the steps are:
   - Set up the sample and target shape(if your data is different) and also shard descriptor(.py) file address in envoy_congig.yaml file
   - If mTLS protection is not set up, run this command:
     ```
-      fx envoy start \
-          -n "ENVOY_NAME" \
-          --disable-tls \
-          --envoy-config-path envoy_config.yaml \
-          -dh director_fqdn \
+      fx envoy start 
+          -n "ENVOY_NAME" 
+          --disable-tls 
+          --envoy-config-path envoy_config.yaml 
+          -dh director_fqdn 
           -dp port
     ```
   - If you have a federation with PKI certificates, run this command:
     ```
-      fx envoy start \
-      -n "ENVOY_NAME" \
-      --envoy-config-path envoy_config.yaml \
-      -dh director_fqdn \
-      -dp port \
-      -rc cert/root_ca.crt \
-      -pk cert/"ENVOY_NAME".key \
+      fx envoy start 
+      -n "ENVOY_NAME" 
+      --envoy-config-path envoy_config.yaml 
+      -dh director_fqdn 
+      -dp port 
+      -rc cert/root_ca.crt 
+      -pk cert/"ENVOY_NAME".key 
       -oc cert/"ENVOY_NAME".crt
     ```
    - You can see the experiment recieved and data loaded status in the log info when it starts.
