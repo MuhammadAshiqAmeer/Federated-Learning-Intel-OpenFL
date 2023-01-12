@@ -26,7 +26,11 @@ If you are cloning this repo then the steps are:
   - You can see the log info of director name,port etc. when it starts
 
 * Start the envoy:
-  - On envoy device, go to envoy folder in terminal. 
+  - On envoy device, go to envoy folder in terminal.
+  - Install packages in requirements.txt file
+  ```
+  pip install -r requirements.txt
+  ```
   - Set up the sample and target shape(if your data is different) and also shard descriptor(.py) file address in envoy_congig.yaml file
   - If mTLS protection is not set up, run this command:
     ```
