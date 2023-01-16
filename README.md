@@ -9,10 +9,10 @@
 * It also contains director config(.yaml) file which sets the configuration of listen host and port of director, also sample and taget shape of data united accross the federation.
 * Envoy folder contains the envoy config (.yaml) file that sets local shard descriptor, rank of the collaborator and worldsize etc., also a shard descreptor(.py) file that is responsible for splitting a single dataset according to collaborator's rank so that every collaborator will get different data during the simulation.(Not the case in real world scenario, there will be independent data associated with each collaborators,so no need of shard_desc)
 * Bash scripts:
- - Deploy - To create a Dockerfile and buld an image, mount a local directory to share experiment and then start container
- - Start - To start container if already created it.
- - StartEnvoy - To start envoy nodes.
- - StartDirector - To start director service.
+    - Deploy - To create a Dockerfile and buld an image, mount a local directory to share experiment and then start container
+    - Start - To start container if already created it.
+    - StartEnvoy - To start envoy nodes.
+    - StartDirector - To start director service.
 
 
 ###  Note  :black_nib: 
