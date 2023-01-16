@@ -1,0 +1,15 @@
+cd envoy
+
+echo 'Name of envoy : '
+read envoy_name
+
+echo 'Name of configuration file :'
+read envoy_config
+
+echo 'Director FQDN/IP :'
+read director_fqdn
+
+echo 'Director listening port No :'
+read port
+
+fx envoy start -n $envoy_name --disable-tls --envoy-config-path $envoy_config.yaml -dh $director_fqdn -dp $port
