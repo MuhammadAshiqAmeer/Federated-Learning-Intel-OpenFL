@@ -46,6 +46,7 @@ If you are cloning this repo then the steps are:
     - The process of defining an experiment is decoupled from the process of establishing a federation. The Experiment manager (or data scientist) is able to prepare an experiment in a Python environment. Then the Experiment manager registers experiments into the federation using Interactive Python API (Beta) that is allow to communicate with the Director using a gRPC client.
     - The Open Federated Learning (OpenFL) interactive Python API enables the Experiment manager (data scientists) to define and start a federated learning experiment from a single entry point: a Jupyter* notebook or a Python script.
     - The jupyter notebook in the director folder contains the detailed code to run the federated learning experiment.
+    - On director machine start jupyter server and open the notebook to run it.
 
 Steps to implement an FL experiment from scratch:
 
