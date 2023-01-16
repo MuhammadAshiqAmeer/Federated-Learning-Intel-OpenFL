@@ -9,6 +9,13 @@
 * It also contains director config(.yaml) file which sets the configuration of listen host and port of director, also sample and taget shape of data united accross the federation.
 * Envoy folder contains the envoy config (.yaml) file that sets local shard descriptor, rank of the collaborator and worldsize etc., also a shard descreptor(.py) file that is responsible for splitting a single dataset according to collaborator's rank so that every collaborator will get different data during the simulation.(Not the case in real world scenario, there will be independent data associated with each collaborators,so no need of shard_desc)
 
+
+
+###  Note  :black_nib: 
+  * FQDN/ip and port are to be set in different files like director.yaml, notebook file where experiment is described, command used when starting the envoy,   bash scrips when starting envoys, according to your machines.
+
+
+
 #### Steps to start a federation:
 If you are cloning this repo then the steps are:
 
