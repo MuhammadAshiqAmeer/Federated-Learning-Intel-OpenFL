@@ -109,6 +109,7 @@ Changing the default weighted average aggregation algorithm:
   bash Start
   ```
   - Start the director in director machine(without docker)
+  - Go to the mounted docker directory in envoy machine.
   - Start the envoys in envoy machines
   ```
   bash StartEnvoy
