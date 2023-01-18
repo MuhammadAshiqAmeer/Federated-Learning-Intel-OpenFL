@@ -106,8 +106,8 @@ Changing the default weighted average aggregation algorithm:
 ### Using Docker:
   - Docker can be used to deploy FL experiments in openfl
   - There is an image of openfl in [Dockerhub](https://hub.docker.com/r/intel/openfl)
-  - For director based approach, the initial connection establishment between Director and Envoys (both running on docker) can be done by exposing a port of director, envoys connected to that port(director listening ip set as 0.0.0.0 to accept all incoming connections through the exposed port and envoys are given with the FQDN/IP of director machine with exposed port No. of director). 
-  - But when we start the experiment, director starts an aggregator service with new port and ip which will be not exposed at the time of docker image creation. So the collaborators started by the envoys will fail to connect to the aggreagator service.
+  - For director based approach, the initial connection establishment between Director and Envoys (both running on docker) can be done by exposing a port of director, making envoys connect to that port(director listening ip set as 0.0.0.0 to accept all incoming connections through the exposed port)and with the FQDN/IP of director machine(not 0.0.0.0) with exposed port No. of director. 
+  - But when we start the experiment, director starts an aggregator service with new port and ip which will be not exposed at the time of docker image creation. As the workspace were already exported to the envoys at the starting of experiment(which containes the aggregator ip and port created by director to connect collaborators with), the collaborators started by the envoys will fail to connect to the aggreagator service.
   - Solution is to start the director without docker(since it will be a static single machine) and deploy envoys using docker(for easy distribution).
   - The bash scripts are included here.
   
