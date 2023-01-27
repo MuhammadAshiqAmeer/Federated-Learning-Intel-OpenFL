@@ -1,3 +1,4 @@
+####  Note  :black_nib:  : Switch branches to see different experiments.
 # Federated lemon-melon CNN classifier(Intel-open-fl)
 ### Director based federated learning workflow of a custom Lemon-melon CNN classifier done in Intel-Open-FL.
 #### Aim to approach and customize Intel-openfl by building an FL model from a custom dataset and an ML experiment defined, using some non default aggregation function.
