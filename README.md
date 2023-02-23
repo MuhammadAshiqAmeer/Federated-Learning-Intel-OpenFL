@@ -7,7 +7,7 @@
 
 * Contains three directories, director, envoy, workspace.
 * Director folder has a director config(.yaml) file which sets the configuration of listen host and port of director, also sample and taget shape of data united accross the federation.
-* Envoy folder contains the envoy config (.yaml) file that sets local shard descriptor, rank of the collaborator and worldsize etc., also a shard descreptor(.py) file that is responsible for splitting a single dataset according to collaborator's rank so that every collaborator will get different data during the simulation.(Not the case in real world scenario, there will be independent data associated with each collaborators,so no need of shard_desc).
+* Envoy folder contains the envoy config (.yaml) file that sets local shard descriptor, rank of the collaborator and worldsize etc., also a shard descreptor(.py) file that is responsible for splitting a single dataset according to collaborator's rank so that every collaborator will get different data during the simulation and for loading the local datasets to start the experiments with.
 * Workspace folder containes .ipynb (notebook) file where the experiment is setup by a Data scientist, which contains code for connecting to federation devices such as aggregators and collaborators, setting up federation tasks for different connected devices, setting federation algorithm etc.
 * Bash scripts:
     - Deploy - To create a Dockerfile and buld an image, mount a local directory to share experiment and then start container(first time running)
