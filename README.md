@@ -1,66 +1,89 @@
 ####  Note  :black_nib:  : Switch branches to see different experiments.
-# Federated lemon-melon CNN classifier(Intel-open-fl)
-### Director based federated learning workflow of a custom Lemon-melon CNN classifier done in Intel-Open-FL.
-#### Aim to approach and customize Intel-openfl by building an FL model from a custom dataset and an ML experiment defined, using some non default aggregation function.
+# Federated Learning on CNN lemon-melon classifier(Intel-open-fl)
+#### Director based federated learning workflow of a custom Lemon-melon CNN classifier done in Intel-Open-FL. Aim to approach and customize Intel-openfl by building an FL model from a custom dataset and an ML experiment defined, using some non default aggregation function.
 
-#### Overview of the repo:
-
-* Contains three directories, director, envoy, workspace.
-* Director folder has a director config(.yaml) file which sets the configuration of listen host and port of director, also sample and taget shape of data united accross the federation.
-* Envoy folder contains the envoy config (.yaml) file that sets local shard descriptor, rank of the collaborator and worldsize etc., also a shard descreptor(.py) file that is responsible for splitting a single dataset according to collaborator's rank so that every collaborator will get different data during the simulation and for loading the local datasets to start the experiments with.
-* Workspace folder containes .ipynb (notebook) file where the experiment is setup by a Data scientist, which contains code for connecting to federation devices such as aggregators and collaborators, setting up federation tasks for different connected devices, setting federation algorithm etc.
+## Repository Overview :
+This repository provides an detailed steps and code of Federated Learning experiment using OpenFL. The repository consists of the following components:
+* The "Director" folder contains a configuration file named director_config.yaml, which sets the listening host, port, and other configuration parameters for the director. It also includes a sample and target shape definition for the unified data across the federation.
+* Inside the "Envoy" folder, you will find the envoy_config.yaml file, which defines the local shard descriptor, collaborator rank, world size, and other settings for the envoy. Additionally, there is a shard_descriptor.py file responsible for loading data from local collaborators to initiate the experiment.
+* The "Workspace" folder contains a Jupyter Notebook (.ipynb) file where a specific federated learning experiment is setup. The notebook includes code to connect to federation devices, creating machine learning model to train, configure federation tasks, choose the federation algorithm, etc.
+* The "Patches" folder shows the modified stream metrics function, to record experiment metric values along with streaming during runtime.
 * Bash scripts:
-    - Deploy - To create a Dockerfile and buld an image, mount a local directory to share experiment and then start container(first time running)
-    - Start - To start container if already created it.(running 2nd time onwards)
-    - StartEnvoy - To start envoy nodes.
-    - StartDirector - To start director service.
+    - Docker directory:
+      * Deploy - This script creates a Dockerfile, builds an image, and mounts a local directory to share the experiment. It is used for the initial setup and             image creation.
+      * Start -  Use this script to start the container if it has already been created.
+    - Scripts directory:
+        * StartEnvoy - Run this script to start the envoy nodes.
+        * StartDirector - Execute this script to start the director service.
+        * distribute.sh & split.sh - These scripts are used for dataset splitting and distribution to collaborators during simulations.
+        * maximum.sh - This script records the metric name and maximum value from the logfile after the experiment.
 
 
-###  Note  :black_nib: 
-  * FQDN/ip and port are to be set in different files like director.yaml, notebook file where experiment is described, command used when starting the envoy,   bash scrips when starting envoys, according to your machines.
+
+####  Note  :black_nib: 
+  * Please ensure to adjust the FQDN/IP and port settings in relevant files such as director.yaml, the experiment notebook, envoy startup commands, and bash scripts, according to your machine's configuration.
 
 
+## Steps to start a federation:
+### Install Intel OpenFL
+  - Prerequisites: Python 3.8 (>=3.6, <3.9) virtual environment using Python venv or Anaconda
+  -  Activate the created virtual environment.
+  - Install OpenFL:
+   * Using PyPl, run the following command:
+       ```
+       python -m pip install openfl
+       ```
+   * Or from source:
+     - Clone the repository:
+       ```
+       git clone https://github.com/intel/openfl.git
+       ```
+     - Install build tools before installing OpenFL:
+       ```
+       python -m pip install -U pip setuptools wheel
+       cd openfl/
+       python -m pip install .
+       ```
+Once you have completed the installation steps, you are ready to use OpenFL in your Python environment. Running the 'fx' command confirms the successful installation of OpenFL. 
 
-#### Steps to start a federation:
-If you are cloning this repo then the steps are:
+### To run this FL experiment:
+   * Start the director:
+      - On director device, go to director folder in the terminal.
+      - set up the listen_host to your FQDN or IP and available port number in director.yaml file.
+      - If mTLS protection is not set up, run this command:(easy way)
+      ```
+          fx director start --disable-tls -c director_config.yaml
+      ```
+      - If you have a federation with PKI certificates, run this command:
+      ```
+          fx director start -c director_config.yaml -rc cert/root_ca.crt -pk cert/priv.key -oc cert/open.crt
+       ```
+      - You can see the log info of director name,port etc. when it starts
+    
+   * Start the envoy:
+      - On envoy device, go to envoy folder in terminal.
+      - Install packages in requirements.txt file
+      ```
+      pip install -r requirements.txt
+      ```
+      - Set up the sample and target shape(if your data is different) and also shard descriptor(.py) file address in envoy_congig.yaml file
+      - If mTLS protection is not set up, run this command:
+        ```
+          fx envoy start -n "ENVOY_NAME" --disable-tls --envoy-config-path envoy_config.yaml -dh director_fqdn -dp port
+        ```
+      - If you have a federation with PKI certificates, run this command:
+        ```
+          fx envoy start -n "ENVOY_NAME" --envoy-config-path envoy_config.yaml -dh director_fqdn -dp port -rc cert/root_ca.crt -pk cert/"ENVOY_NAME".key -oc cert/"ENVOY_NAME".crt
+        ```
+       - You can see the experiment recieved and data loaded status in the log info when it starts.
+      
+   * Setup an experiment
+        - The process of defining an experiment is decoupled from the process of establishing a federation. The Experiment manager (or data scientist) is able to prepare an experiment in a Python environment. Then the Experiment manager registers experiments into the federation using Interactive Python API (Beta) that is allow to communicate with the Director using a gRPC client.
+        - The Open Federated Learning (OpenFL) interactive Python API enables the Experiment manager (data scientists) to define and start a federated learning experiment from a single entry point: a Jupyter* notebook or a Python script.
+        - The jupyter notebook in the workspace folder contains the detailed code to run the federated learning experiment.
+        - On a machine start jupyter server and open the notebook to run it.
 
-* Start the director:
-  - On director device, go to director folder in the terminal.
-  - set up the listen_host to your FQDN or IP and available port number in director.yaml file.
-  - If mTLS protection is not set up, run this command:(easy way)
-  ```
-      fx director start --disable-tls -c director_config.yaml
-  ```
-  - If you have a federation with PKI certificates, run this command:
-  ```
-      fx director start -c director_config.yaml -rc cert/root_ca.crt -pk cert/priv.key -oc cert/open.crt
-   ```
-  - You can see the log info of director name,port etc. when it starts
-
-* Start the envoy:
-  - On envoy device, go to envoy folder in terminal.
-  - Install packages in requirements.txt file
-  ```
-  pip install -r requirements.txt
-  ```
-  - Set up the sample and target shape(if your data is different) and also shard descriptor(.py) file address in envoy_congig.yaml file
-  - If mTLS protection is not set up, run this command:
-    ```
-      fx envoy start -n "ENVOY_NAME" --disable-tls --envoy-config-path envoy_config.yaml -dh director_fqdn -dp port
-    ```
-  - If you have a federation with PKI certificates, run this command:
-    ```
-      fx envoy start -n "ENVOY_NAME" --envoy-config-path envoy_config.yaml -dh director_fqdn -dp port -rc cert/root_ca.crt -pk cert/"ENVOY_NAME".key -oc cert/"ENVOY_NAME".crt
-    ```
-   - You can see the experiment recieved and data loaded status in the log info when it starts.
-  
-* Setup an experiment
-    - The process of defining an experiment is decoupled from the process of establishing a federation. The Experiment manager (or data scientist) is able to prepare an experiment in a Python environment. Then the Experiment manager registers experiments into the federation using Interactive Python API (Beta) that is allow to communicate with the Director using a gRPC client.
-    - The Open Federated Learning (OpenFL) interactive Python API enables the Experiment manager (data scientists) to define and start a federated learning experiment from a single entry point: a Jupyter* notebook or a Python script.
-    - The jupyter notebook in the workspace folder contains the detailed code to run the federated learning experiment.
-    - On a machine start jupyter server and open the notebook to run it.
-
-Steps to implement an FL experiment from scratch:
+### To build a different custom FL experiment :
 
   - On director :
   
