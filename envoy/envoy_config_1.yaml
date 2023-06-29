@@ -16,13 +16,12 @@
 # 2. sample_shape - shape of sample's numpy representaion that will by return from __getitem__ 
 # 3. target_shape - shape of target's numpy representaion that will by return from __getitem__ 
 
-
 params:
   cuda_devices: []
 
 optional_plugin_components: {}
 
 shard_descriptor:
-  template: shard_descriptor.mnistShardDescriptor
+  template: shard_descriptor.neuroblastomaShardDescriptor
   params:
-    rank_worldsize: 1, 2
+    rank_worldsize: 1, 3

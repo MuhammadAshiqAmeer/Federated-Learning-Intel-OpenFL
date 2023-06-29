@@ -1,13 +1,13 @@
 ####  Note  :black_nib:  : Switch branches to see different experiments.
-# Federated MNIST CNN classifier(Intel-open-fl)
-### Director based federated learning workflow of a MNIST CNN classifier done in Intel-Open-FL.
+# Federated Neuroblastoma (Intel-open-fl)
+### Director based federated learning on a realworld Neuroblastoma database done in Intel-Open-FL.
 #### Aim to approach and customize Intel-openfl by building an FL model from a custom dataset and an ML experiment defined, using some non default aggregation function.
 
 #### Overview of the repo:
 
 * Contains three directories, director, envoy, workspace.
 * Director folder has a director config(.yaml) file which sets the configuration of listen host and port of director, also sample and taget shape of data united accross the federation.
-* Envoy folder contains the envoy config (.yaml) file that sets local shard descriptor, rank of the collaborator and worldsize etc., also a shard descreptor(.py) file that is responsible for splitting a single dataset according to collaborator's rank so that every collaborator will get different data during the simulation and also for loading the local datasets to start the experiments with.
+* Envoy folder contains the envoy config (.yaml) file that sets local shard descriptor, rank of the collaborator and worldsize etc., also a shard descreptor(.py) file that is responsible for splitting a single dataset according to collaborator's rank so that every collaborator will get different data during the simulation and also for loading the data from the local collaborators to start experiment with.
 * Workspace folder containes .ipynb (notebook) file where the experiment is setup by a Data scientist, which contains code for connecting to federation devices such as aggregators and collaborators, setting up federation tasks for different connected devices, setting federation algorithm etc.
 * Bash scripts:
     - Deploy - To create a Dockerfile and buld an image, mount a local directory to share experiment and then start container(first time running)
