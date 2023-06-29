@@ -83,7 +83,7 @@ Once you have completed the installation steps, you are ready to use OpenFL in y
         - The jupyter notebook in the workspace folder contains the detailed code to run the federated learning experiment.
         - On a machine start jupyter server and open the notebook to run it.
 
-Steps to implement an FL experiment from scratch:
+#### To build a different custom FL experiment
 
   - On director :
   
