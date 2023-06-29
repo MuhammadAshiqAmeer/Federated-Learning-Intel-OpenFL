@@ -1,0 +1,27 @@
+7d6
+< import datetime
+116c115,120
+<         log_file_name = os.path.join("/home/ashiq/Desktop/Federated_learning_experiments_with_Intel-openfl/result",datetime.datetime.now().strftime("%Y-%m-%d_%H:%M:%S.csv"))
+---
+>         for metric_message_dict in self.federation.dir_client.stream_metrics(self.experiment_name):
+>             self.logger.metric(
+>                 f'Round {metric_message_dict["round"]}, '
+>                 f'collaborator {metric_message_dict["metric_origin"]} '
+>                 f'{metric_message_dict["task_name"]} result '
+>                 f'{metric_message_dict["metric_name"]}:\t{metric_message_dict["metric_value"]:f}')
+118,128d121
+<         with open(log_file_name, "w") as log_file:
+<             for metric_message_dict in self.federation.dir_client.stream_metrics(self.experiment_name):
+<                 metric_value = metric_message_dict["metric_value"]
+<                 log_line = (f'Round {metric_message_dict["round"]}, '
+<                             f'{metric_message_dict["metric_origin"]}, '
+<                             f'{metric_message_dict["task_name"]} result '
+<                             f'{metric_message_dict["metric_name"]} ,' 
+<                             f'{metric_message_dict["metric_value"]:f}')
+<                 self.logger.metric(log_line)
+<                 log_file.write(log_line + "\n")
+<                 
+131c124
+<        
+---
+> 
