@@ -1,3 +1,4 @@
+Know more: [What is Federated Learning?](https://gist.github.com/MuhammadAshiqAmeer/9e4b78a2e7b5509a0a9bbcf2eb1be855)
 ####  Note  :black_nib:  : Switch branches to see different experiments.
 # Federated MNIST CNN classifier(Intel-open-fl)
 #### Director based federated learning workflow of a custom MNIST CNN classifier done in Intel-Open-FL. Aim to approach and customize Intel-openfl by building an FL model from a custom dataset and an ML experiment defined, using some non default aggregation function.
